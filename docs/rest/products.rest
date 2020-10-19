@@ -1,0 +1,26 @@
+@accessToken = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYwMzA1MjAwMiwiZXhwIjoxNjAzMDU1NjAyLCJuYmYiOjE2MDMwNTIwMDIsImp0aSI6InBKMjRRMDNDWWRhdkh6TTMiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJpZCI6MX0.5leYs-M80m-3mO5p5-XSK4RL0CauA16s0782KUdsadQ
+
+@baseUrl = http://localhost:8000/api
+
+GET {{baseUrl}}/products
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+###
+
+GET {{baseUrl}}/products/find/6
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+###
+
+POST {{baseUrl}}/products
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+	"name": "Gato de botas",
+	"price": 29.99,
+    "description": "Infantil",
+	"category": 1
+}
+
+###

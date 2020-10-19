@@ -1,0 +1,13 @@
+@accessToken = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYwMzA0MzIwNywiZXhwIjoxNjAzMDQ2ODA3LCJuYmYiOjE2MDMwNDMyMDcsImp0aSI6IlhLa3RremVUcmswSUhPR2MiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJpZCI6MX0.y8u1SfpOWLP4WqNZvhqvDfsniwRrkRj545ovp9ljDNc
+
+@baseUrl = http://localhost:8000/api
+
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+	"email": "admin@api.com",
+    "password": "123456"
+}
+
+###

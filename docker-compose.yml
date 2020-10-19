@@ -1,0 +1,114 @@
+version: '3'
+
+services:
+
+    rabbitmq:
+        image: 'rabbitmq:3.8-management-alpine'
+        container_name: "rabbitmq"
+        ports:
+        - 15672:15672
+        - 5672:5672
+        - 25672:25672
+        - 35672:35672
+        environment:
+        - RABBITMQ_DEFAULT_USER=admin
+        - RABBITMQ_DEFAULT_PASS=admin
+        - RABBITMQ_USE_LONGNAME=true
+        volumes:
+            - './.docker/rabbitmq:/var/lib/rabbitmq/mnesia'
+        networks:
+            - app-network
+
+    app:
+        build: ./backend
+        container_name: api
+        entrypoint: dockerize -template ./.docker/app/.env:.env -wait tcp://db:5432 -timeout 40s ./.docker/entrypoint.sh
+        environment:
+            - _DB_HOST=db
+            - _DB_DATABASE=api
+            - _DB_USERNAME=postgres
+            - _DB_PASSWORD=postgres
+        volumes:
+            - ./backend:/var/www
+        networks:
+            - app-network
+        depends_on:
+            - db
+            - rabbitmq
+    
+    mail:
+        build: ./mail
+        container_name: mail
+        environment:
+            - AMQP=amqp://admin:admin@rabbitmq:5672
+            - MAIL_HOST=smtp.mailtrap.io
+            - MAIL_PORT=2525
+            - MAIL_USER=b3dcc42a583895
+            - MAIL_PASS=f264cff5c1e5b8
+        networks:
+            - app-network
+        depends_on:
+            - rabbitmq
+    
+    frontend:
+        build: ./frontend
+        container_name: frontend
+        environment:
+            - api=app
+        ports:
+            - "8080:8080"
+        networks:
+            - app-network
+        depends_on:
+            - app
+
+    nginx:
+        build: ./.docker/nginx
+        container_name: nginx
+        restart: always
+        tty: true
+        ports:
+            - "8000:80"
+        volumes:
+            - ./backend:/var/www
+        networks:
+            - app-network
+        depends_on:
+            - app
+
+    db:
+        image: postgres:10
+        container_name: postgres
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=api
+        ports:
+            - 5432:5432
+        expose:
+            - "5432"
+        volumes:
+            - ./.docker/db:/var/lib/postgresql/data
+            - ./.docker/db/database:/docker-entrypoint-initdb.d
+        networks:
+            - app-network
+    
+    pgadmin:
+        image: dpage/pgadmin4
+        container_name: pgadmin
+        depends_on:
+            - db
+        environment:
+            PGADMIN_DEFAULT_EMAIL: dev@dev.com
+            PGADMIN_DEFAULT_PASSWORD: test1234
+            PGADMIN_LISTEN_PORT: 5050
+        ports:
+            - "5050:5050"
+        volumes:
+            - ./.docker/pgadmin:/var/lib/pgadmin
+        networks:
+            - app-network
+    
+networks:
+    app-network:
+        driver: bridge

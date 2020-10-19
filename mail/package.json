@@ -1,0 +1,15 @@
+{
+  "name": "mail",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "serve": "node serve.js"
+  },
+  "dependencies": {
+    "amqplib": "^0.6.0",
+    "dotenv": "^8.2.0",
+    "email-templates": "^7.1.1",
+    "pug": "^3.0.0"
+  }
+}
