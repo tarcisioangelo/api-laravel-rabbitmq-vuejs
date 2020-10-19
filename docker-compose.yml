@@ -22,7 +22,7 @@ services:
     app:
         build: ./backend
         container_name: api
-        entrypoint: dockerize -template ./.docker/app/.env:.env -wait tcp://db:5432 -timeout 40s ./.docker/entrypoint.sh
+        entrypoint: dockerize -template ./.docker/app/.env.dev:.env -wait tcp://db:5432 -timeout 40s ./.docker/entrypoint.sh
         environment:
             - _DB_HOST=db
             - _DB_DATABASE=api
