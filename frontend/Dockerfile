@@ -9,7 +9,8 @@ WORKDIR /usr/app
 
 COPY package.json yarn.lock ./
 
-RUN yarn --production
+# RUN yarn --
+RUN npm install
 
 COPY . ./
 
