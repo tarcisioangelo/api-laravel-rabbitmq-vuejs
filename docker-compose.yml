@@ -15,7 +15,7 @@ services:
         - RABBITMQ_DEFAULT_PASS=admin
         - RABBITMQ_USE_LONGNAME=true
         volumes:
-            - './.docker/rabbitmq:/var/lib/rabbitmq/mnesia'
+            - 'db_rabbitmq:/var/lib/rabbitmq/mnesia'
         networks:
             - app-network
 
@@ -88,8 +88,8 @@ services:
         expose:
             - "5432"
         volumes:
-            - ./.docker/db:/var/lib/postgresql/data
-            - ./.docker/db/database:/docker-entrypoint-initdb.d
+            - db_data:/var/lib/postgresql/data
+            # - ./.docker/db/database:/docker-entrypoint-initdb.d
         networks:
             - app-network
     
@@ -105,10 +105,15 @@ services:
         ports:
             - "5050:5050"
         volumes:
-            - ./.docker/pgadmin:/var/lib/pgadmin
+            - db_admin:/var/lib/pgadmin
         networks:
             - app-network
     
+volumes:
+    db_data:
+    db_admin:
+    db_rabbitmq:
+
 networks:
     app-network:
         driver: bridge
