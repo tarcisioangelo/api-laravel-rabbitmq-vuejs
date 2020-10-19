@@ -1,3 +1,3 @@
 
 // Development
-export const baseUrl = 'http://app:8000/api'
+export const baseUrl = 'http://localhost:8000/api'
