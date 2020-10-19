@@ -1,0 +1,25 @@
+@accessToken = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYwMzAzMjk2MSwiZXhwIjoxNjAzMDM2NTYxLCJuYmYiOjE2MDMwMzI5NjEsImp0aSI6IkNLQ3RLVXlEeUpXaFR1bEQiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJpZCI6MX0.AOFi4T1H6Ps3rv868aqRmvdHss1L1XW-ARwwzGzsL2M
+
+@baseUrl = http://localhost:8000/api
+
+GET {{baseUrl}}/users
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+###
+
+GET {{baseUrl}}/users/find/1
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+###
+
+POST {{baseUrl}}/users
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+	"name": "Tarcisio",
+	"email": "tarcisio.angelo@gmail.com",
+    "password": "123456"
+}
+
+###
