@@ -9,10 +9,10 @@ use App\Models\User;
 
 class AuthController extends Controller {
 
-    private $objUser;
+    private $dbUser;
 
     public function __construct() {
-        $this->objUser = new User();
+        $this->dbUser = new User();
     }
 
     public function login(Request $request) {
@@ -23,11 +23,11 @@ class AuthController extends Controller {
                 return response()->json(['error' => 'Unauthorized'], 401);
             }
 
-            $user = $this->objUser->where('email', $credentials['email'])->first();
+            $user = $this->dbUser->where('email', $credentials['email'])->first();
 
             return $this->respondWithToken($token, $user);
         } catch (\Exception $e) {
-            return ['success' => false, 'message' => $e->getMessage()];
+            return ['error' => $e->getMessage()];
         }
 
     }

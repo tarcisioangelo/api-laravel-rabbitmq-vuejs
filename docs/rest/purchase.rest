@@ -2,22 +2,24 @@
 
 @baseUrl = http://localhost:8000/api
 
-POST {{baseUrl}}/login
+GET {{baseUrl}}/purchase
 Content-Type: application/json
-
-{
-	"email": "admin@api.com",
-    "password": "admin"
-}
-
-
+Authorization: Bearer {{accessToken}}
 ###
-POST {{baseUrl}}/login
+
+# GET {{baseUrl}}/purchase/find/6
+# Content-Type: application/json
+# Authorization: Bearer {{accessToken}}
+###
+
+POST {{baseUrl}}/purchase
 Content-Type: application/json
+Authorization: Bearer {{accessToken}}
 
 {
-	"email": "tarcisio.angelo@gmail.com",
-    "password": "123456"
+	"product": 1,
+	"quantity": 1,
+    "total": 50
 }
 
 ###

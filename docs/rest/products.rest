@@ -1,4 +1,4 @@
-@accessToken = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYwMzA1MjAwMiwiZXhwIjoxNjAzMDU1NjAyLCJuYmYiOjE2MDMwNTIwMDIsImp0aSI6InBKMjRRMDNDWWRhdkh6TTMiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJpZCI6MX0.5leYs-M80m-3mO5p5-XSK4RL0CauA16s0782KUdsadQ
+@accessToken = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYwMzIwMjQ4NywiZXhwIjoxNjAzMjA2MDg3LCJuYmYiOjE2MDMyMDI0ODcsImp0aSI6IjNEWUNUTWtnZ0hoQlVFQ3kiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJpZCI6MX0.kgy2rsTYaNgFmkgGS_3T4fN386Howq-aqm7Qv8RMIuk
 
 @baseUrl = http://localhost:8000/api
 
@@ -17,9 +17,9 @@ Content-Type: application/json
 Authorization: Bearer {{accessToken}}
 
 {
-	"name": "Gato de botas",
+	"name": "Produto Fake",
 	"price": 29.99,
-    "description": "Infantil",
+    "description": "Um produto feito para você",
 	"category": 1
 }
 

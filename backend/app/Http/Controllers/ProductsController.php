@@ -3,73 +3,43 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Models\Product;
+use App\Services\ServiceProduct;
 
 class ProductsController extends Controller
 {
-    private $objProduct;
+    private $srvProduct;
 
     public function __construct() {
-        $this->objProduct = new Product();
+        $this->srvProduct = new ServiceProduct();
     }
 
     public function index() {
-        return $this->objProduct->all();
+        try {
+            return $this->srvProduct->listProducts();
+        } catch (\Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
     }
 
     public function find($id) {
         try {
-            $product = $this->objProduct->find($id);
-
-            if($product === null) {
-                throw new \Exception('Product not found by ID ' . $id);
-            }
-
-            return $product;
+            return $this->srvProduct->find($id);
         } catch (\Exception $e) {
-            return ['success' => false, 'message' => $e->getMessage()];
+            return ['error' => $e->getMessage()];
         }
     }
 
     public function store(Request $request) {
         try {
-            $user = auth()->user();
+            $data = $request->only(['name', 'description', 'price', 'category']);
 
-            $data = [
-                'id_user' => $user->id,
-                'name' => $request->name,
-                'description' => $request->description,
-                'price' => $request->price,
-                'id_category' => $request->category
-            ];
+            $product = $this->srvProduct->save($data);
 
-            $this->objProduct->create($data);
-
-            return ['success' => true, 'message' => 'Cadastro realizado com sucesso!', 'data' => $data];
+            return ['message' => 'Cadastro realizado com sucesso!', 'product' => $product];
         } catch (\Exception $e) {
-            return ['success' => false, 'message' => $e->getMessage()];
+            return ['error' => $e->getMessage()];
         }
     }
 
-    public function show($id)
-    {
-        //
-    }
 
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
-    }
 }
