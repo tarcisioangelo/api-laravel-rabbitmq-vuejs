@@ -16,7 +16,7 @@ class UserSeeder extends Seeder {
             'name' => 'Admin',
             'email' => 'admin@api.com',
             'password' => 'admin',
-            'id_perfil' => 1
+            'id_profile' => 1
         ]);
 
         $this->command->info('User admin created');
