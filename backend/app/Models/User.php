@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 use App\Models\Product;
-use App\Models\Perfil;
+use App\Models\Profile;
 
 class User extends Authenticatable implements JWTSubject {
 
@@ -21,7 +21,7 @@ class User extends Authenticatable implements JWTSubject {
         'name',
         'email',
         'password',
-        'id_perfil',
+        'id_profile',
     ];
 
     protected $hidden = [
@@ -37,8 +37,8 @@ class User extends Authenticatable implements JWTSubject {
         return $this->hasMany(Product::class, 'id_user');
     }
 
-    public function relPerfil () {
-        return $this->hasOne(Perfil::class, 'id', 'id_perfil');
+    public function relProfile () {
+        return $this->hasOne(Profile::class, 'id', 'id_profile');
     }
 
     public function getJWTIdentifier() {

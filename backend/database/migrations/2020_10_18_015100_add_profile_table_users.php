@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddPerfilTableUsers extends Migration
+class AddProfileTableUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class AddPerfilTableUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('id_perfil')->unsigned()->after('password');
-            $table->foreign('id_perfil')->references('id')->on('perfil')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('id_profile')->unsigned()->after('password');
+            $table->foreign('id_profile')->references('id')->on('profile')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
