@@ -50,17 +50,17 @@ services:
         depends_on:
             - rabbitmq
     
-    # frontend:
-    #     build: ./frontend
-    #     container_name: frontend
-    #     environment:
-    #         - api=app
-    #     ports:
-    #         - "8080:8080"
-    #     networks:
-    #         - app-network
-    #     depends_on:
-    #         - app
+    frontend:
+        build: ./frontend
+        container_name: frontend
+        environment:
+            - api=app
+        ports:
+            - "8080:8080"
+        networks:
+            - app-network
+        depends_on:
+            - app
 
     nginx:
         build: ./.docker/nginx
