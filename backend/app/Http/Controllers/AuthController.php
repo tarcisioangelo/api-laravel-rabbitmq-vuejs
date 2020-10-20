@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use App\Models\User;
+
+use App\Services\ServiceUser;
 
 class AuthController extends Controller {
 
-    private $dbUser;
+    private $srvUser;
 
     public function __construct() {
-        $this->dbUser = new User();
+        $this->srvUser = new ServiceUser();
     }
 
     public function login(Request $request) {
@@ -23,7 +24,7 @@ class AuthController extends Controller {
                 return response()->json(['error' => 'Unauthorized'], 401);
             }
 
-            $user = $this->dbUser->where('email', $credentials['email'])->first();
+            $user = $this->srvUser->findForEmail($credentials['email']);
 
             return $this->respondWithToken($token, $user);
         } catch (\Exception $e) {
@@ -35,6 +36,7 @@ class AuthController extends Controller {
     protected function respondWithToken($token, $user) {
         return response()->json([
             'name' => $user->name,
+            'profile' => $user->profile,
             'token' => $token,
             'expires_in' => auth('api')->factory()->getTTL() * 60
         ]);
