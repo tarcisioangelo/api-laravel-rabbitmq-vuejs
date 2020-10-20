@@ -1,4 +1,9 @@
 <template>
+  <div>
+    <v-alert dense outlined text :color="alertType" v-if="alertType">
+      {{ alertText }}
+    </v-alert>
+
     <form >
         <v-text-field
             v-model="email"
@@ -19,11 +24,11 @@
             @blur="$v.password.$touch()"
         />
 
-        <v-btn class="mr-4" @click="submit" color="red lighten-2">
+        <v-btn class="mr-4" @click="submit" color="green lighten-2" :disable="!email || !password">
             Entrar
         </v-btn>
-        
-        <v-btn @click="clear">
+
+        <v-btn class="mr-4"@click="clear">
             Limpar
         </v-btn>
         
@@ -31,6 +36,7 @@
           <v-btn> Cadastrar </v-btn>
         </router-link>
     </form>
+  </div>
 </template>
 
 <script>
@@ -48,8 +54,10 @@
     },
 
     data: () => ({
-      email: '',
-      password: ''
+      email: null,
+      password: null,
+      alertType: null,
+      alertText: null
     }),
 
     computed: {
@@ -83,7 +91,8 @@
           this.setUser(response)
           this.$router.push('/')
         } catch (error) {
-            console.error(error)
+          console.error(error)
+          this.showAlert('error', error.error)
         }
       },
       clear () {
@@ -91,6 +100,15 @@
         this.password = ''
         this.email = ''
       },
+      showAlert (type, text) {
+        this.alertType = type
+        this.alertText = text
+        
+        setTimeout(() => {
+            this.alertType = null
+            this.alertText = ''
+        }, 5000)
+      }
     },
   }
 </script>

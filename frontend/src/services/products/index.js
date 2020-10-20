@@ -11,6 +11,16 @@ const Service = {
         const url = `products/find/${productId}`;
         return api.get(url, serviceUtil.getHeaders())
     },
+
+    productSave: function(data) {
+        const url = `products`;
+        return api.post(url, data, serviceUtil.getHeaders())
+    },
+
+    productDelete: function(productId) {
+        const url = `products/${productId}`;
+        return api.delete(url, serviceUtil.getHeaders())
+    },
 }
 
 export default Service

@@ -33,6 +33,7 @@ Route::get('/products/find/{id}', [ProductsController::class, 'find']);
 
 Route::group(['middleware' => ['authJwt']], function () {
     Route::post('/products', [ProductsController::class, 'store']);
+    Route::delete('/products/{id}', [ProductsController::class, 'delete']);
 });
 
 /**

@@ -1,25 +1,30 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import router from '../router'
+import ServiceStorage from '../services/storage'
 
 Vue.use(Vuex)
 
-const userLocal = localStorage.getItem('user')
+const userLocal = ServiceStorage.getUser()
 
 export default new Vuex.Store({
   state: {
-    user: userLocal ? JSON.parse(userLocal) : undefined,
+    user: userLocal ? userLocal : undefined,
   },
   mutations: {
     setUser: (state, payload) => state.user = payload, 
   },
   actions: {
     setUser: ({ commit }, payload) => {
-      localStorage.setItem('user', JSON.stringify(payload))
+      ServiceStorage.setUser(payload)
       commit('setUser', payload)
     }, 
     logout: ({ commit }) => {
-      localStorage.removeItem('user')
+      ServiceStorage.removeUser()
       commit('setUser', null)
+      if(router.currentRoute.name !== 'Home') {
+        router.push('/')
+      }
     }, 
   },
   modules: {

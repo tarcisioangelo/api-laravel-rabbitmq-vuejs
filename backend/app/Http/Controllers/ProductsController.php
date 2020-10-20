@@ -31,11 +31,31 @@ class ProductsController extends Controller
 
     public function store(Request $request) {
         try {
-            $data = $request->only(['name', 'description', 'price', 'category']);
+            $data = $request->only(['id', 'name', 'description', 'price', 'category']);
+
+            $message = 'Cadastro realizado com sucesso!';
 
             $product = $this->srvProduct->save($data);
 
-            return ['message' => 'Cadastro realizado com sucesso!', 'product' => $product];
+            if($data['id']) {
+                $message = 'Atualizado com sucesso';
+            }
+
+            return ['message' => $message, 'product' => $product];
+        } catch (\Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
+
+    public function delete($id) {
+        try {
+            if(!$id) {
+                throw new \Exception('ID é obrigatório');
+            }
+
+            $this->srvProduct->delete($id);
+
+            return ['message' => 'Excluído com sucesso!'];
         } catch (\Exception $e) {
             return ['error' => $e->getMessage()];
         }

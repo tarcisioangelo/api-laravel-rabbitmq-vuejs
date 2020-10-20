@@ -28,10 +28,11 @@
             @blur="$v.password.$touch()"
         />
 
-        <v-btn class="mr-4" @click="submit" color="red lighten-2">
+        <v-btn class="mr-4" @click="submit" color="green lighten-2">
             Salvar dados
         </v-btn>
-        <v-btn @click="clear">
+
+        <v-btn class="mr-4" @click="clear">
             Limpar
         </v-btn>
 

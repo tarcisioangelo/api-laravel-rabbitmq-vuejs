@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from '../../store'
+import Router from 'vue-router';
 
 import { baseUrl } from '../../config'
 
@@ -14,9 +15,10 @@ const error = (error) => {
     if (error.response.status === 500) {
         return Promise.reject(error.response.data)
     }
-
+    
     if (error.response.status === 401) {
         store.dispatch('setUser', null)
+        Router.push('/')
         return Promise.reject(error.response.data)
     }
     

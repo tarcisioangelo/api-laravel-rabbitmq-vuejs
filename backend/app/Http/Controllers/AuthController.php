@@ -21,7 +21,7 @@ class AuthController extends Controller {
             $credentials = $request->only("email", "password");
 
             if (! $token = auth('api')->attempt($credentials)) {
-                return response()->json(['error' => 'Unauthorized'], 401);
+                throw new \Exception('Usuário não encontrado!');
             }
 
             $user = $this->srvUser->findForEmail($credentials['email']);
@@ -37,6 +37,7 @@ class AuthController extends Controller {
         return response()->json([
             'name' => $user->name,
             'profile' => $user->profile,
+            'profileID' => $user->idProfile,
             'token' => $token,
             'expires_in' => auth('api')->factory()->getTTL() * 60
         ]);

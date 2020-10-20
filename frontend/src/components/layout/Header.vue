@@ -1,9 +1,17 @@
 <template>
   <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
+      <div class="d-flex align-center" style="margin-right: 16px;">
         <span v-if="user"> Olá, {{ user.name }} </span>
         <span v-if="!user"> Catálogo de Produtos  </span>
       </div>
+
+      <v-divider vertical />
+
+      <router-link to="/painel" tag="button" v-if="user && user.profileID === 1">
+        <v-btn text>
+            <span class="mr-2">Painel administrativo</span>
+        </v-btn>
+      </router-link>
 
       <v-spacer></v-spacer>
 
@@ -20,6 +28,7 @@
           Logout
         </span>
       </v-btn>
+
 
       <router-link to="/login" tag="button">
         <v-btn text v-if="!user">

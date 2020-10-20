@@ -43,7 +43,17 @@ class ServiceProduct {
             'id_category' => $data['category']
         ];
 
+        if($data['id']) {
+            return $this->dbProduct
+                ->where('id', $data['id'])
+                ->update($objProduct);
+        }
+
         return $this->dbProduct->create($objProduct);
+    }
+
+    public function delete($id) {
+        return $this->dbProduct->where('id', $id)->delete();
     }
 
 

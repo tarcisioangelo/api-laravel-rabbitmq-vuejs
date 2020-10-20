@@ -11,8 +11,8 @@ class CategorySeeder extends Seeder {
      * Criando as Categorias principais
      */
     public function run() {
-        Category::create(['id' => 1, 'description' => 'Books']);
-        Category::create(['id' => 2, 'description' => 'Pencil']);
+        Category::create(['id' => 1, 'description' => 'Livros']);
+        Category::create(['id' => 2, 'description' => 'Outros']);
         $this->command->info('Categories created');
     }
 }

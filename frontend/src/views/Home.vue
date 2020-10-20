@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <Header />
-    <v-main>
+    <v-main class="grey lighten-3">
       <Products />
     </v-main>
   </v-app>
