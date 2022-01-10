@@ -1,7 +1,7 @@
 
 # Projeto Catálogo de Produtos
 
-- Projeto para estudos
+- Projeto para estudos 2022
 
 ### Backend Laravel - API
 
